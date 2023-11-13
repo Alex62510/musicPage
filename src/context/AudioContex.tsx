@@ -1,12 +1,14 @@
-import {createContext, useState} from 'react'
+import {createContext, ReactNode, useState} from 'react'
 import tracksList from "../assets/tracksList.ts";
 import {TrackType} from "../components/Track/Track.tsx";
 
 const audio = new Audio()
 
 export const AudioContex = createContext<any>({})
-
-const AudioProvider = ({children}) => {
+interface AudioProviderProps{
+    children:ReactNode
+}
+const AudioProvider: React.FC<AudioProviderProps>  = ({children}) => {
     const [currentTrack, setCurrentTrack] = useState(tracksList[0])
     const [isPlaying, setIsPlaying] = useState(false)
 
