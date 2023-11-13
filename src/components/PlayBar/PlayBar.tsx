@@ -10,10 +10,11 @@ const TimeControl = () => {
     const [currentTime, setCurrentTime] = useState(0)
     const {audio, currentTrack} = useContext(AudioContex)
     const {duration} = currentTrack
+
     const formattedCurrentTime = secondsToMMSS(currentTime)
     const sliderCurrentTime = Math.round((currentTime / duration) * 100)
-    const handleChangeCurrentTime = (_, value: any) => {
-        const time = Math.round((value / 100) * duration)
+    const handleChangeCurrentTime = (_: Event, value: number | number[] ) => {
+        const time = Math.round((Array.isArray(value) ? value[0] : value) / 100 * duration);
         setCurrentTime(time)
         audio.currentTime = time
     }
@@ -26,7 +27,7 @@ const TimeControl = () => {
         return () => {
             clearInterval(timeInterval)
         }
-    }, []);
+    }, [audio.currentTime]);
 
     return (
         <>
