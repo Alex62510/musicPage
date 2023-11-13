@@ -3,17 +3,8 @@ import tracksList from "../assets/tracksList.ts";
 import {TrackType} from "../components/Track/Track.tsx";
 
 const audio = new Audio()
-interface AudioContextType {
-    audio: HTMLAudioElement;
-    duration: number;
-    setCurrentTime: React.Dispatch<React.SetStateAction<number>>;
-}
-const defaultAudioContextValue: AudioContextType = {
-    audio: document.createElement('audio'), // Example default audio element
-    duration: 0, // Example default duration
-    setCurrentTime: () => {}, // Example default state updater
-};
-export const AudioContex = createContext<AudioContextType>(defaultAudioContextValue)
+
+export const AudioContex = createContext<any>({})
 
 const AudioProvider = ({children}) => {
     const [currentTrack, setCurrentTrack] = useState(tracksList[0])
